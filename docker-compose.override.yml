@@ -1,0 +1,6 @@
+services:
+  sum-api:
+    volumes:
+      - ./:/app:cached
+    environment:
+      - WATCHFILES_FORCE_POLLING=true

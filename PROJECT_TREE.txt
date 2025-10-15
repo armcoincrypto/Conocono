@@ -1,0 +1,100 @@
+Conocono/
+├── .idea
+│   ├── inspectionProfiles
+│   │   └── profiles_settings.xml
+│   ├── .gitignore
+│   ├── Conocono.iml
+│   ├── misc.xml
+│   ├── modules.xml
+│   ├── vcs.xml
+│   └── workspace.xml
+├── ai-code-writer
+│   ├── .github
+│   │   ├── workflows
+│   │   │   ├── ci.yml
+│   │   │   ├── doctor.yml
+│   │   │   └── project-doctor.yml
+│   │   └── CODEOWNERS
+│   ├── docs
+│   │   └── README.md
+│   ├── examples
+│   │   ├── a.py
+│   │   ├── add_cli.py
+│   │   ├── all_flags.py
+│   │   ├── app.py
+│   │   ├── b.py
+│   │   ├── c.py
+│   │   ├── checksum_cli_gen.py
+│   │   ├── echo.py
+│   │   ├── echo_click.py
+│   │   ├── echo_gem.py
+│   │   ├── fib.py
+│   │   ├── fib_custom.py
+│   │   ├── fib_gemini.py
+│   │   ├── flag_test.py
+│   │   ├── gen.py
+│   │   ├── gen_test.py
+│   │   ├── greet.py
+│   │   ├── hello.py
+│   │   ├── hello_local.py
+│   │   ├── post_cmd_test.py
+│   │   ├── q.py
+│   │   ├── rest_client.py
+│   │   ├── sandbox.py
+│   │   ├── v1.py
+│   │   ├── v2.py
+│   │   ├── v3.py
+│   │   └── watcher.py
+│   ├── scripts
+│   │   ├── llm_env.sh
+│   │   ├── merge_pr_safely.sh
+│   │   └── new_feature.sh
+│   ├── .dockerignore
+│   ├── .env.example
+│   ├── .flake8
+│   ├── .gitignore
+│   ├── .pre-commit-config.yaml
+│   ├── .python-version
+│   ├── add_cli_autotest.py
+│   ├── app_fastapi.py
+│   ├── bp.json
+│   ├── bp_checks.json
+│   ├── checksum_cli.py
+│   ├── cleanup.py
+│   ├── cli.py
+│   ├── code_writer.py
+│   ├── dev_doctor.py
+│   ├── disable_reviews.json
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   ├── enable_reviews.json
+│   ├── Makefile
+│   ├── merge_pr5_now.sh
+│   ├── merge_pr_safe.sh
+│   ├── merge_pr_safely.sh
+│   ├── mypy.ini
+│   ├── pytest.ini
+│   ├── require_co.json
+│   ├── requirements-dev.txt
+│   ├── requirements.lock
+│   ├── requirements.txt
+│   ├── run_pr_merge_protect.sh
+│   ├── stats_csv.py
+│   ├── test_add_cli_autotest.py
+│   ├── test_app_fastapi.py
+│   ├── test_app_fastapi_http.py
+│   ├── test_checksum_cli.py
+│   ├── test_dev_doctor.py
+│   ├── test_exec.py
+│   ├── test_stats_csv.py
+│   ├── test_unit_ok.py
+│   └── unit_ok.py
+├── .env.example
+├── .env.local
+├── docker-compose.override.yml
+├── docker-compose.yml
+├── Dockerfile
+├── main.py
+├── Makefile
+├── requirements.txt
+└── scan_project.py

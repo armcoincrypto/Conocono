@@ -4,7 +4,7 @@ import os
 import re
 from typing import Any, Dict
 
-from fastapi import FastAPI, Query
+from fastapi import APIRouter, FastAPI, Query
 from pydantic import BaseModel
 
 app = FastAPI(title="Conocono API", version="1.0.0")
@@ -97,3 +97,25 @@ if __name__ == "__main__":
 
     if "--serve" in sys.argv:
         uvicorn.run("app_fastapi:app", host="127.0.0.1", port=8000, reload=False)
+# --- simple “about” endpoint ---
+
+try:
+    router  # if already defined somewhere, reuse
+except NameError:
+    router = APIRouter()
+
+
+@router.get("/about")
+def about():
+    return {
+        "name": "Conocono",
+        "status": "ok",
+        "message": "Minimal demo endpoint to verify feature flow.",
+    }
+
+
+# Make sure router is included in app (if not already)
+try:
+    app.include_router(router)
+except Exception:
+    pass

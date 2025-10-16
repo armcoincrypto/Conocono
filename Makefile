@@ -43,3 +43,7 @@ smoke-local:
 	@echo "Health:"; curl -sf http://127.0.0.1:8001/health | ./.venv/bin/python -c "import sys,json;print(json.load(sys.stdin))"
 	@echo "Sum:"; curl -sf "http://127.0.0.1:8001/sum?a=2&b=3" | ./.venv/bin/python -c "import sys,json;print(json.load(sys.stdin))"
 	@echo "==> Stopping temporary server"; kill `cat .uv.pid` >/dev/null 2>&1 || true; rm -f .uv.pid
+
+.PHONY: ci
+ci: dev-install test api-test smoke-local
+	@echo "CI quick pass ✅"

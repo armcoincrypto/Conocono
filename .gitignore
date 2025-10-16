@@ -13,3 +13,7 @@ node_modules/
 # IDE
 .idea/
 .vscode/
+.env
+.env.local
+.env.*
+!.env.sample

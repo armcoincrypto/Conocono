@@ -97,3 +97,14 @@ if __name__ == "__main__":
 
     if "--serve" in sys.argv:
         uvicorn.run("app_fastapi:app", host="127.0.0.1", port=8000, reload=False)
+
+# FastAPI endpoint: POST /chat
+# Input JSON: { "messages": [{ "role": "user"|"system"|"assistant", "content": "..." }] }
+# Uses OPENAI_API_KEY and OPENAI_BASE_URL env vars.
+# Calls an LLM (gpt-4o-mini or compatible) and returns: { "reply": "..." }.
+# Validate input, handle errors cleanly.
+# Use pydantic model for request/response. Add docstring. Keep it simple.
+# Test: POST /chat
+# - happy path: messages=[{"role":"user","content":"Say hi"}] -> JSON with "reply" string
+# - bad request: missing messages -> 422 or 400
+# Use the same TestClient pattern as other tests here.

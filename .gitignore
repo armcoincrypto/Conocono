@@ -10,3 +10,6 @@ build/
 node_modules/
 *.iml
 *.local
+# IDE
+.idea/
+.vscode/

@@ -90,6 +90,41 @@ def debug_route() -> Dict[str, Any]:
     }
 
 
+# --- /chat endpoint (LLM when configured, fallback otherwise) ---
+class ChatRequest(BaseModel):
+    message: str
+
+
+@app.post("/chat")
+def chat(req: ChatRequest):
+    import os
+
+    key = os.getenv("OPENAI_API_KEY")
+    base = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    model = os.getenv("OPENAI_MODEL")
+
+    # Fallback if no credentials configured
+    if not key or not model:
+        return {"message": "Hello! 👋", "model": None}
+
+    # Try OpenAI-compatible endpoint (works with OpenAI or Ollama's /v1)
+    try:
+        from openai import OpenAI
+
+        client = OpenAI(api_key=key, base_url=base)
+        resp = client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": req.message}],
+            max_tokens=32,
+        )
+        text = (resp.choices[0].message.content or "").strip()
+        return {"message": text or "Hello! 👋", "model": model}
+    except Exception as e:
+        # Never crash the API because of LLM errors
+        msg = "Hello! 👋"  # safe fallback reply
+        return {"message": msg, "model": None, "error": str(e)[:200]}
+
+
 if __name__ == "__main__":
     import sys
 

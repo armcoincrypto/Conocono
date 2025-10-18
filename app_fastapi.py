@@ -5,6 +5,7 @@ import re
 from typing import Any, Dict
 
 from fastapi import FastAPI, Query
+from openai import OpenAI
 from pydantic import BaseModel
 
 app = FastAPI(title="Conocono API", version="1.0.0")
@@ -97,3 +98,43 @@ if __name__ == "__main__":
 
     if "--serve" in sys.argv:
         uvicorn.run("app_fastapi:app", host="127.0.0.1", port=8000, reload=False)
+
+# --- Minimal /chat endpoint (fallback-only) ---
+
+
+class ChatRequest(BaseModel):
+    message: str
+
+
+@app.post("/chat")
+def chat(req: ChatRequest):
+    """
+    If OPENAI_* env vars are set, call an OpenAI-compatible server.
+    Supported:
+      - OpenAI cloud:   OPENAI_BASE_URL=https://api.openai.com/v1
+      - Ollama local:   OPENAI_BASE_URL=http://127.0.0.1:11434/v1  (key can be "ollama")
+    Fallback: returns a friendly static message if not configured.
+    """
+    base_url = os.getenv("OPENAI_BASE_URL")
+    api_key = os.getenv("OPENAI_API_KEY")
+    model = os.getenv("OPENAI_MODEL")
+
+    if base_url and api_key and model:
+        try:
+            client = OpenAI(base_url=base_url, api_key=api_key)
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": req.message}],
+                temperature=0.7,
+                max_tokens=60,
+            )
+            txt = resp.choices[0].message.content if resp.choices else ""
+            return {"message": txt or "Hi!", "model": model}
+        except Exception as e:
+            return {"detail": f"LLM error: {e.__class__.__name__}: {e}", "model": model}
+
+    # Fallback if not configured
+    return {"message": "Hello! 👋 (fallback; no OpenAI configured)", "model": None}
+
+    # Minimal placeholder reply so the route exists and can be wired to LLM later
+    return {"message": "Hello! 👋"}

@@ -97,3 +97,14 @@ if __name__ == "__main__":
 
     if "--serve" in sys.argv:
         uvicorn.run("app_fastapi:app", host="127.0.0.1", port=8000, reload=False)
+
+
+# --- Minimal /chat endpoint (placeholder) ---
+class ChatRequest(BaseModel):
+    message: str
+
+
+@app.post("/chat")
+def chat(req: ChatRequest):
+    # placeholder reply; you can wire OpenAI/Ollama later
+    return {"message": "Hello! 👋"}

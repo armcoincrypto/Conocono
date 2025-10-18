@@ -95,7 +95,7 @@ class ChatRequest(BaseModel):
     message: str
 
 
-@app.post("/chat")
+@app.post("/chat")  # basic chat endpoint
 def chat(req: ChatRequest):
     import os
 

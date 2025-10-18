@@ -90,6 +90,19 @@ def debug_route() -> Dict[str, Any]:
     }
 
 
+# --- Minimal /chat endpoint (placeholder) ---
+
+
+class ChatRequest(BaseModel):
+    message: str
+
+
+@app.post("/chat")
+def chat(req: ChatRequest):
+    # placeholder reply; real LLM wiring comes via env (OpenAI/Ollama) later
+    return {"message": "Hello! 👋"}
+
+
 if __name__ == "__main__":
     import sys
 
